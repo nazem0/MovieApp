@@ -1,0 +1,86 @@
+<div id="carousel" class="carousel slide" data-bs-ride="carousel">
+
+    <!-- <ol class="carousel-indicators" *ngIf="movieList">
+        <li data-bs-target="#carousel" data-bs-slide-to="0" class="text-white active" aria-current="true"
+        [attr.aria-label]="movieList.results[0].title"></li>
+        <ng-container *ngFor="let movie of movieList.results.slice(1,5); let i = index">
+            <li data-bs-target="#carousel" class="text-white" [attr.data-bs-slide-to]="i+1" [attr.aria-label]="movie.title">
+            </li>
+        </ng-container>
+
+    </ol> -->
+
+    <div class="carousel-inner" role="listbox" *ngIf="movieList">
+        <div class="carousel-item active">
+            <img [src]="resourcesURL+movieList.results[0].backdrop_path" class="w-100 d-block"
+                [alt]="resourcesURL+movieList.results[0].title">
+            <div class="carousel-caption d-none d-md-block">
+                <div class="container">
+                <h3>{{movieList.results[0].title}}</h3>
+                <p>{{movieList.results[0].overview}}</p>
+                </div>
+            </div>
+        </div>
+        <ng-container *ngFor="let movie of movieList.results.slice(1,5)">
+
+            <div class="carousel-item">
+                <img src="{{resourcesURL+movie.backdrop_path}}" class="w-100 d-block" alt="{{movie.title}}">
+                <div class="carousel-caption d-none d-md-block">
+                    <div class="container">
+                        <h3>{{movie.title}}</h3>
+                        <p>{{movie.overview}}</p>
+                    </div>
+                </div>
+            </div>
+
+        </ng-container>
+
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<!-- 
+<div id="carouselId" class="carousel slide" data-bs-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-bs-target="#carouselId" data-bs-slide-to="0" class="active" aria-current="true" aria-label="First slide"></li>
+        <li data-bs-target="#carouselId" data-bs-slide-to="1" aria-label="Second slide"></li>
+        <li data-bs-target="#carouselId" data-bs-slide-to="2" aria-label="Third slide"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+        <div class="carousel-item active">
+            <img src="holder.js/900x500/auto/#777:#555/text:First slide" class="w-100 d-block" alt="First slide">
+            <div class="carousel-caption d-none d-md-block">
+                <h3>Title</h3>
+                <p>Description</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="holder.js/900x500/auto/#666:#444/text:Second slide" class="w-100 d-block" alt="Second slide">
+            <div class="carousel-caption d-none d-md-block">
+                <h3>Title</h3>
+                <p>Description</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="holder.js/900x500/auto/#666:#444/text:Third slide" class="w-100 d-block" alt="Third slide">
+            <div class="carousel-caption d-none d-md-block">
+                <h3>Title</h3>
+                <p>Description</p>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div> -->

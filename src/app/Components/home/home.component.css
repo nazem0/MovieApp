@@ -1,0 +1,16 @@
+.carousel-caption {
+    position: absolute;
+    inset: unset;
+    bottom: 0;
+    color: #fff;
+    text-align: center;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.60);
+}
+
+#carousel *{
+    max-height: 100vh;
+}
+#carousel img{
+    object-fit:cover;
+}

@@ -1,0 +1,56 @@
+<section>
+  <div class="container">
+    <div class="row row-cols-xl-4 row-cols-md-3 row-cols-sm-2 row-cols-1 justify-content-center">
+      <div *ngFor="let Movie of MovieList">
+        <div class="card-container">
+          <div class="card shadow position-relative overflow-hidden">
+            <img src="{{ ResourcesURL + Movie.poster_path }}" alt="..." />
+            <div class="card-body text-center position-absolute bottom-0 bg-dark bg-gradient text-white w-100">
+              <h5 class="card-title fw-bolder fs-6">{{ Movie.title }}</h5>
+              <p class="card-text">{{ Movie.overview | overviewLenghth }}</p>
+              <a class="btn btn-outline-info" routerLink="/movie/{{Movie.id}}">Show Movie</a>
+            </div>
+            <div class="smallDetails">
+              <div class="vote"
+                [ngClass]="{'bg-primary':Movie.vote_average>5,'bg-success':Movie.vote_average>7,'bg-warning':Movie.vote_average<5}">
+                <span>{{Movie.vote_average}}</span>
+              </div>
+              <span class="text-white">{{Movie.original_language|uppercase}}</span>
+              <span class="text-white">{{Movie.release_date}}</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <ul class="pagination">
+      <li class="page-item" [ngClass]="{ disabled: Page == 1 }">
+        <a class="page-link" routerLink="/movies/{{ 1 }}" (click)="Page = 1">
+          <i class="fa-solid fa-backward-step"></i>
+        </a>
+      </li>
+      <li *ngIf="Page-1>0" class="page-item">
+        <a class="page-link" routerLink="/movies/{{ Page - 1 }}" (click)="Page = Page - 1">
+          {{ Page - 1 }}
+        </a>
+      </li>
+
+      <li class="page-item active" aria-current="page">
+        <a class="page-link bg-success" routerLink="/movies/{{ Page }}">{{ Page }}</a>
+      </li>
+
+      <li *ngIf="Page+1<501" class="page-item">
+        <a class="page-link" routerLink="/movies/{{ Page + 1 }}" (click)="Page = Page + 1">
+          {{ Page + 1 }}
+        </a>
+      </li>
+      <li class="page-item" [ngClass]="{ disabled: Page == 500 }">
+        <a class="page-link" routerLink="/movies/{{ 500 }}" (click)="Page = 500">
+          <i class="fa-solid fa-forward-step"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
