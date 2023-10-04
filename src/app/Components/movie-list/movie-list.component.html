@@ -1,56 +1,64 @@
 <section>
   <div class="container">
-    <div class="row row-cols-xl-4 row-cols-md-3 row-cols-sm-2 row-cols-1 justify-content-center">
-      <div *ngFor="let Movie of MovieList">
-        <div class="card-container">
-          <div class="card shadow position-relative overflow-hidden">
-            <img src="{{ ResourcesURL + Movie.poster_path }}" alt="..." />
-            <div class="card-body text-center position-absolute bottom-0 bg-dark bg-gradient text-white w-100">
-              <h5 class="card-title fw-bolder fs-6">{{ Movie.title }}</h5>
-              <p class="card-text">{{ Movie.overview | overviewLenghth }}</p>
-              <a class="btn btn-outline-info" routerLink="/movie/{{Movie.id}}">Show Movie</a>
-            </div>
-            <div class="smallDetails">
-              <div class="vote"
-                [ngClass]="{'bg-primary':Movie.vote_average>5,'bg-success':Movie.vote_average>7,'bg-warning':Movie.vote_average<5}">
-                <span>{{Movie.vote_average}}</span>
+    <ng-container *ngIf="MovieList.length!=0">
+      <div class="row row-cols-xl-4 row-cols-md-3 row-cols-sm-2 row-cols-1 justify-content-center">
+        <div *ngFor="let Movie of MovieList">
+          <div class="card-container">
+            <div class="card shadow position-relative overflow-hidden">
+              <img *ngIf="Movie.poster_path" src="{{ ResourcesURL + Movie.poster_path }}" alt="..." />
+              <div class="card-body text-center position-absolute bottom-0 bg-dark bg-gradient text-white w-100">
+                <h5 class="card-title fw-bolder fs-6">{{ Movie.original_title }}</h5>
+                <p *ngIf="Movie.overview" class="card-text">{{ Movie.overview | overviewLenghth }}</p>
+                <a class="btn btn-outline-info" routerLink="/movie/{{Movie.id}}">Show Movie</a>
               </div>
-              <span class="text-white">{{Movie.original_language|uppercase}}</span>
-              <span class="text-white">{{Movie.release_date}}</span>
+              <div class="smallDetails">
+                <div *ngIf="Movie.vote_average" class="vote"
+                  [ngClass]="{'bg-primary':Movie.vote_average>5,'bg-success':Movie.vote_average>7,'bg-warning':Movie.vote_average<5}">
+                  <span>{{Movie.vote_average.toFixed(1)}}</span>
+                </div>
+                <span class="text-white">{{Movie.original_language|uppercase}}</span>
+                <span class="text-white">{{Movie.release_date}}</span>
+              </div>
             </div>
           </div>
-        </div>
 
+        </div>
+      </div>
+      <div class="d-flex justify-content-center">
+        <ul class="pagination">
+          <li class="page-item" [ngClass]="{ disabled: Page == 1 }">
+            <a class="page-link" routerLink="/movies/{{ 1 }}/{{Query}}" (click)="Page = 1">
+              <i class="fa-solid fa-backward-step"></i>
+            </a>
+          </li>
+          <li *ngIf="Page-1>0" class="page-item">
+            <a class="page-link" routerLink="/movies/{{ Page - 1 }}/{{Query}}" (click)="Page = Page - 1">
+              {{ Page - 1 }}
+            </a>
+          </li>
+
+          <li class="page-item active" aria-current="page">
+            <a class="page-link bg-success" routerLink="/movies/{{ Page }}/{{Query}}">{{ Page }}</a>
+          </li>
+
+          <li *ngIf="Page+1<Max+1" class="page-item">
+            <a class="page-link" routerLink="/movies/{{ Page + 1 }}/{{Query}}" (click)="Page = Page + 1">
+              {{ Page + 1 }}
+            </a>
+          </li>
+          <li class="page-item" [ngClass]="{ disabled: Page == Max}">
+            <a class="page-link" routerLink="/movies/{{ Max }}/{{Query}}" (click)="Page = Max">
+              <i class="fa-solid fa-forward-step"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </ng-container>
+    <div *ngIf="noResult">
+      <div class="display-5 text-center">
+        <i class="fa-solid fa-magnifying-glass text-warning"></i>
+        <p>We didn't find the movie you are searching for :(</p>
       </div>
     </div>
-  </div>
-  <div class="d-flex justify-content-center">
-    <ul class="pagination">
-      <li class="page-item" [ngClass]="{ disabled: Page == 1 }">
-        <a class="page-link" routerLink="/movies/{{ 1 }}" (click)="Page = 1">
-          <i class="fa-solid fa-backward-step"></i>
-        </a>
-      </li>
-      <li *ngIf="Page-1>0" class="page-item">
-        <a class="page-link" routerLink="/movies/{{ Page - 1 }}" (click)="Page = Page - 1">
-          {{ Page - 1 }}
-        </a>
-      </li>
-
-      <li class="page-item active" aria-current="page">
-        <a class="page-link bg-success" routerLink="/movies/{{ Page }}">{{ Page }}</a>
-      </li>
-
-      <li *ngIf="Page+1<501" class="page-item">
-        <a class="page-link" routerLink="/movies/{{ Page + 1 }}" (click)="Page = Page + 1">
-          {{ Page + 1 }}
-        </a>
-      </li>
-      <li class="page-item" [ngClass]="{ disabled: Page == 500 }">
-        <a class="page-link" routerLink="/movies/{{ 500 }}" (click)="Page = 500">
-          <i class="fa-solid fa-forward-step"></i>
-        </a>
-      </li>
-    </ul>
   </div>
 </section>

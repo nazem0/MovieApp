@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IMovieDetails } from 'src/app/Models/IMovieDetails';
 import { MoviesAPIService } from 'src/app/Services/movies-api.service';
@@ -14,7 +14,7 @@ export class MovieComponent {
     this.currentRoute.paramMap.subscribe({
       next: (params) => {
         this.movieId = Number.parseInt(params.get('movieId')!);
-        this.moviesAPI.GetWatchProviders(this.movieId).subscribe(response=>console.log(response))
+        this.moviesAPI.GetWatchProviders(this.movieId).subscribe(response => console.log(response))
         this.showMovieDetails();
       },
       error: (error) => console.error(error),
@@ -27,6 +27,7 @@ export class MovieComponent {
   trailers: string[] = [];
   trailer: string = "";
   trailersIndexer: number = 0;
+  noResult: boolean = false;
   showMovieDetails(page: number = this.movieId) {
     this.moviesAPI.GetMovie(page).subscribe({
       next: (response) => {
@@ -41,11 +42,15 @@ export class MovieComponent {
   getMovieTrailers(movieId: number = this.movieId) {
     this.moviesAPI.GetMovieTrailers(movieId).subscribe({
       next: (response) => {
-        response.results.forEach(element => {
-          this.trailers.push(`https://www.${element.site}.com/embed/${element.key}`)
-        });
-        this.trailer = this.trailers[0];
-        console.log(this.trailers);
+        if (response.results.length > 0) {
+          response.results.forEach(element => {
+            this.trailers.push(`https://www.${element.site}.com/embed/${element.key}`)
+          });
+          this.trailer = this.trailers[0];
+          console.log(this.trailers);
+          return;
+        }
+        this.noResult = true;
       },
       error: (err) => console.error(err),
       complete: () => console.log('Movie Trailers Received'),

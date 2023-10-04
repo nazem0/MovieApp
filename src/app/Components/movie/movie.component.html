@@ -12,7 +12,7 @@
                 {{ movieDetails.overview }}
             </p>
         </div>
-        <div *ngIf="trailer;else noTrailer" class="py-3">
+        <div *ngIf="trailer" class="py-3">
             <div class="d-flex justify-content-center">
                 <ul class="pagination">
                     <li class="page-item">
@@ -49,20 +49,20 @@
                     allowfullscreen></iframe>
             </div>
 
+            <div class="d-flex justify-content-center fw-bold fs-4 flex-wrap gap-2">
+                <p class="text-white text-shadow-sm">
+                    For More Details & Watch Providers, Visit
+                </p>
+                <a title="The Movie Database (TMDB)" class="tmdb text-decoration-none"
+                    href="https://www.themoviedb.org/movie/{{ movieId }}">
+                    TMDB
+                </a>
+            </div>
         </div>
-        <ng-template #noTrailer>
+        <div *ngIf="noResult">
             <div class="noTrailer bg-dark bg-gradient px-5 text-warning rounded-5 shadow">
                 <p class="display-3 text-center w-75">Wow ! I guess we don't have any trailers for this movie :O</p>
             </div>
-        </ng-template>
-        <div class="d-flex justify-content-center fw-bold fs-4 flex-wrap gap-2">
-            <p class="text-white text-shadow-sm">
-                For More Details & Watch Providers, Visit
-            </p>
-            <a title="The Movie Database (TMDB)" class="tmdb text-decoration-none"
-                href="https://www.themoviedb.org/movie/{{ movieId }}">
-                TMDB
-            </a>
         </div>
     </div>
 </section>

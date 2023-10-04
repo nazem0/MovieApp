@@ -19,14 +19,12 @@
     height: 100%;
     border: unset;
     border-radius: 30px;
-
     background-color: #1a1a1a;
     transition: all .2s;
 }
 
 .card:hover {
-    transform: scale(0.98);
-    border-radius: 25px;
+    transform: scaleY(0.98) scaleX(0.97);
 }
 
 
