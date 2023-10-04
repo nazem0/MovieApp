@@ -1,0 +1,9 @@
+.logo{
+    width: 5vw;
+    min-width: 50px;
+    border-radius: 50%;
+}
+
+nav{
+    min-height: 15vh;
+}

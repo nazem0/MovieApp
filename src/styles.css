@@ -7,7 +7,7 @@ body{
 }
 img{max-width: 100%;}
 section{padding: 4rem 0;}
-@media (min-width:320px){
+@media (min-width:0){
     :root{
         font-size: 12px !important;
     }

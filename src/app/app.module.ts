@@ -9,6 +9,8 @@ import { NotFoundComponent } from './Components/not-found/not-found.component';
 import { MovieComponent } from './Components/movie/movie.component';
 import { SafeURLPipe } from './Pipes/SafeURL.pipe';
 import { HomeComponent } from './Components/home/home.component';
+import { NavbarComponent } from './Components/navbar/navbar.component';
+import { LayoutComponent } from './Components/layout/layout.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { HomeComponent } from './Components/home/home.component';
     NotFoundComponent,
     MovieComponent,
     SafeURLPipe,
-    HomeComponent
+    HomeComponent,
+    NavbarComponent,
+    LayoutComponent
   ],
   imports: [
     BrowserModule,
