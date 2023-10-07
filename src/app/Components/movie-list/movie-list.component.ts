@@ -1,9 +1,8 @@
 import { MoviesAPIService } from 'src/app/Services/movies-api.service';
-import { Component, OnChanges, SimpleChanges } from '@angular/core';
+import { Component} from '@angular/core';
 import { IMovie } from 'src/app/Models/IMovie';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-import { query } from '@angular/animations';
 
 @Component({
   selector: 'app-movie-list',
