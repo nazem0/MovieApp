@@ -219,7 +219,7 @@
           aria-label="Search"
           #SearchInput
         />
-        <button title="Search" class="btn btn-outline-success" type="button" (click)="search()"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <button title="Search" class="btn btn-outline-success" type="button" [routerLink]="['/movies','1']" [queryParams]="{'search':SearchInput.value}"><i class="fa-solid fa-magnifying-glass"></i></button>
       </div>
       
     </div>

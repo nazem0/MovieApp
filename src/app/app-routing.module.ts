@@ -10,8 +10,7 @@ const routes: Routes = [
     path: "", component: LayoutComponent, children: [
       { path: "", component: HomeComponent },
       { path: "movies", redirectTo: "movies/1/" },
-      { path: "movies/:pageNumber", component: MovieListComponent,pathMatch:"full" },
-      { path: "movies/:pageNumber/:query", component: MovieListComponent, pathMatch:"full" },
+      { path: "movies/:pageNumber", component: MovieListComponent},
       { path: "movie/:movieId", component: MovieComponent }
 
     ]
@@ -26,7 +25,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    initialNavigation: 'enabledBlocking'
+})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
