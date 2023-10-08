@@ -1,5 +1,5 @@
 import { MoviesAPIService } from 'src/app/Services/movies-api.service';
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { IMovie } from 'src/app/Models/IMovie';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./movie-list.component.css'],
 })
 export class MovieListComponent {
-  Query:string="";
+  Query: string = "";
 
   ResourcesURL: string = this.moviesAPI.ResourcesURL;
 
@@ -18,9 +18,9 @@ export class MovieListComponent {
 
   Page!: number;
 
-  Max:number=500;
+  Max: number = 500;
 
-  noResult=false;
+  noResult = false;
 
   ShowMovies: Function = (page: number = this.Page) => {
     if (page > this.Max || page <= 0) {
@@ -28,15 +28,15 @@ export class MovieListComponent {
       this.Router.navigate(['/404'])
       return;
     }
-    this.moviesAPI.GetAllMovies(page,this.Query).subscribe({
+    this.moviesAPI.GetAllMovies(page, this.Query).subscribe({
       next: (response) => {
         if (response.results.length > 0) {
           this.MovieList = response.results;
-          response.total_pages<500?this.Max=response.total_pages:null;
+          response.total_pages < 500 ? this.Max = response.total_pages : null;
           console.log(response);
           return;
         }
-        this.noResult=true;
+        this.noResult = true;
       },
       error: (err) => console.error(err),
       complete: () => console.log('Movie List Received'),
@@ -51,10 +51,11 @@ export class MovieListComponent {
     this.CurrentRoute.paramMap.subscribe({
       next: (params) => {
         this.Page = Number.parseInt(params.get('pageNumber')!);
-        this.Query=params.get('query')!;
-        console.log(this.Query);
-        this.ShowMovies();
-        console.log(this.Page);
+        this.CurrentRoute.queryParams.subscribe((params) => {
+          this.Query = params['search']
+          this.ShowMovies();
+
+        })
       },
       error: (error) => console.error(error),
       complete: () => console.log('pageNumber Received'),

@@ -38,16 +38,16 @@
           </li>
 
           <li class="page-item active" aria-current="page">
-            <a class="page-link bg-success" routerLink="/movies/{{ Page }}/{{Query}}">{{ Page }}</a>
+            <a class="page-link bg-success" routerLink="/movies/{{ Page }}" [queryParams]="{search:Query}">{{ Page }}</a>
           </li>
 
           <li *ngIf="Page+1<Max+1" class="page-item">
-            <a class="page-link" routerLink="/movies/{{ Page + 1 }}/{{Query}}" (click)="Page = Page + 1">
+            <a class="page-link" routerLink="/movies/{{ Page + 1 }}" [queryParams]="{search:Query}" (click)="Page = Page + 1">
               {{ Page + 1 }}
             </a>
           </li>
           <li class="page-item" [ngClass]="{ disabled: Page == Max}">
-            <a class="page-link" routerLink="/movies/{{ Max }}/{{Query}}" (click)="Page = Max">
+            <a class="page-link" routerLink="/movies/{{ Max }}" [queryParams]="{search:Query}" (click)="Page = Max">
               <i class="fa-solid fa-forward-step"></i>
             </a>
           </li>

@@ -9,12 +9,12 @@ const routes: Routes = [
   {
     path: "", component: LayoutComponent, children: [
       { path: "", component: HomeComponent },
-      { path: "movies", redirectTo: "movies/1/" },
+      // { path: "movies", redirectTo: "/movies/1" },
       { path: "movies/:pageNumber", component: MovieListComponent},
       { path: "movie/:movieId", component: MovieComponent }
 
     ]
-  },
+  },  
   {
     path: "**", component: NotFoundComponent
   },

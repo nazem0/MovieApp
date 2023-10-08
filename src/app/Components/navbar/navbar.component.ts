@@ -12,6 +12,7 @@ export class NavbarComponent {
 
   }
   search(){
-    this.Router.navigate([`/movies/1/${this.searchInput.nativeElement.value}`])
+    this.Router.navigate(['/movies/1/'],{queryParams:{search:this.searchInput.nativeElement.value}})
+    
   }
 }
